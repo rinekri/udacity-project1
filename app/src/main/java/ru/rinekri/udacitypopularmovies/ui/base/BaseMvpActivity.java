@@ -4,9 +4,12 @@ import android.os.Bundle;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
+import butterknife.ButterKnife;
+
 abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements BaseMvpView<D> {
 
-  abstract ActivityConfig provideActivityConfig();
+  protected abstract ActivityConfig provideActivityConfig();
+  protected abstract void initView();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,8 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     if (getActionBar() != null) {
       getActionBar().setTitle(config.titleRes());
     }
+    ButterKnife.bind(this);
+    initView();
   }
 
   @Override
