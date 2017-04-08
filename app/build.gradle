@@ -29,7 +29,7 @@ android {
     versionName "1.0"
     signingConfig signingConfigs.debug
 
-    buildConfigField 'String', 'DEFAULT_BASE_URL', '"http://"'
+    buildConfigField 'String', 'DEFAULT_BASE_URL', '"https://api.themoviedb.org/"'
   }
 
   signingConfigs {
@@ -57,6 +57,7 @@ dependencies {
   compile rootProject.ext.coreDepends
   compile rootProject.ext.supportLibDepends
   compile rootProject.ext.otherDepends
+  compile rootProject.ext.streamsBackportDepends
   annotationProcessor rootProject.ext.aptDepends
   provided rootProject.ext.providedDepends
 
