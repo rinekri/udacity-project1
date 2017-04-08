@@ -48,6 +48,7 @@ dependencies {
   compile rootProject.ext.supportLibDepends
   compile rootProject.ext.otherDepends
   annotationProcessor rootProject.ext.aptDepends
+  provided rootProject.ext.providedDepends
 
   debugCompile rootProject.ext.leakCanary
   releaseCompile rootProject.ext.leakCanaryNoOp

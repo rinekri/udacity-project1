@@ -5,6 +5,9 @@ ext {
   def okhttpVersion = '3.4.2'
   def leakCanaryVersion = '1.5'
   def butterKnifeVersion = '8.5.1'
+  def autoValueVersion = '1.2'
+  def autoParselVersion = '1.0.3'
+  def daggerVersion = '2.8'
 
   coreDepends = [
     "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -12,7 +15,9 @@ ext {
     'com.squareup.moshi:moshi:1.3.1',
     "com.squareup.okhttp3:okhttp:$okhttpVersion",
     "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
-    "com.arello-mobile:moxy:$moxyVersion"
+    "com.arello-mobile:moxy:$moxyVersion",
+    "com.google.auto.value:auto-value:$autoValueVersion",
+    "com.google.dagger:dagger:$daggerVersion"
   ]
 
   otherDepends = [
@@ -25,14 +30,23 @@ ext {
   ]
 
   aptDepends = [
-    "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+    "com.jakewharton:butterknife-compiler:$butterKnifeVersion",
+    "com.google.auto.value:auto-value:$autoValueVersion",
+    "frankiesardo:auto-parcel:$autoParselVersion",
+    "com.google.dagger:dagger-compiler:$daggerVersion",
+    "com.arello-mobile:moxy-compiler:$moxyVersion"
+  ]
+
+  providedDepends = [
+    "frankiesardo:auto-parcel:$autoParselVersion",
+    'org.glassfish:javax.annotation:10.0-b28'
   ]
 
   supportLibDepends = [
-     "com.android.support:appcompat-v7:$supportLibVersion",
-     "com.android.support:cardview-v7:$supportLibVersion",
-     "com.android.support:recyclerview-v7:$supportLibVersion",
-     "com.android.support:design:$supportLibVersion"
+    "com.android.support:appcompat-v7:$supportLibVersion",
+    "com.android.support:cardview-v7:$supportLibVersion",
+    "com.android.support:recyclerview-v7:$supportLibVersion",
+    "com.android.support:design:$supportLibVersion"
   ]
 
   leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
