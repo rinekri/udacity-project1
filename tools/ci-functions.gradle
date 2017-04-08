@@ -6,7 +6,7 @@ ext {
 
   getApiKey = {
     if (!isCIBuild()) {
-      println("note: running outside of CI environment, using hardcoded BUILD_NUMBER, edit manually if needed")
+      println("note: running outside of CI environment, using hardcoded local value, edit manually if needed")
       return localDbMovieApiKey
     } else {
       def apiKey = System.getenv("THE_MOVIE_DB_API_KEY")
