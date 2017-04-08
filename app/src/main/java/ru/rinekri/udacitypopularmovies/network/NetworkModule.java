@@ -60,6 +60,8 @@ public class NetworkModule {
       .build();
   }
 
+  @Provides
+  @ApplicationScope
   public MainServiceApi mainServiceApi(Retrofit retrofit) {
     return retrofit.create(MainServiceApi.class);
   }
