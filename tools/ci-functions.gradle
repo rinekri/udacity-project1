@@ -7,7 +7,7 @@ ext {
   getApiKey = {
     if (!isCIBuild()) {
       println("note: running outside of CI environment, using hardcoded local value, edit manually if needed")
-      return localDbMovieApiKey
+      return property("THE_MOVIE_DB_API_KEY")
     } else {
       def apiKey = System.getenv("THE_MOVIE_DB_API_KEY")
       if (apiKey == null) {
@@ -17,5 +17,3 @@ ext {
     }
   }
 }
-
-apply from: rootProject.file('tools/private-keys.gradle')

@@ -17,4 +17,4 @@ local.properties
 firebase-crashreporting.json
 .externalNativeBuild
 libwebp
-/tools/private-keys.gradle
+/app/gradle.properties
