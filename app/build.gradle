@@ -1,10 +1,20 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 apply from: rootProject.file('tools/lint.gradle')
+
+retrolambda {
+  jvmArgs '-noverify'
+}
 
 android {
   compileSdkVersion rootProject.ext.targetSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 
   dexOptions {
     maxProcessCount 2
