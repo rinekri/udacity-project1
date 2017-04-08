@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 apply from: rootProject.file('tools/lint.gradle')
+apply from: rootProject.file('tools/ci-functions.gradle')
 
 retrolambda {
   jvmArgs '-noverify'
@@ -30,6 +31,7 @@ android {
     signingConfig signingConfigs.debug
 
     buildConfigField 'String', 'DEFAULT_BASE_URL', '"https://api.themoviedb.org/"'
+    buildConfigField 'String', 'DB_MOVIE_API_KEY', '"' + getApiKey() + '"'
   }
 
   signingConfigs {
