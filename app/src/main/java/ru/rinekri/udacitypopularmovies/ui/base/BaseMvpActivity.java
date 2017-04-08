@@ -18,4 +18,16 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
       getActionBar().setTitle(config.titleRes());
     }
   }
+
+  @Override
+  public void showContent(D data) {}
+
+  @Override
+  public void showEmpty() {}
+
+  @Override
+  public void showError(String message) {}
+
+  @Override
+  public void showLoading() {}
 }
