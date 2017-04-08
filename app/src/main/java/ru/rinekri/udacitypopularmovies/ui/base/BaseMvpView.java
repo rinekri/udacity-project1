@@ -6,7 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
-interface BaseMvpView<D> extends MvpView {
+public interface BaseMvpView<D> extends MvpView {
   void showContent(D data);
   void showLoading();
   void showEmpty();
