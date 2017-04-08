@@ -1,0 +1,40 @@
+ext {
+  def supportLibVersion = '25.1.0'
+  def retrofitVersion = '2.2.0'
+  def moxyVersion = '1.4.5'
+  def okhttpVersion = '3.4.2'
+  def leakCanaryVersion = '1.5'
+  def butterKnifeVersion = '8.5.1'
+
+  coreDepends = [
+    "com.squareup.retrofit2:retrofit:$retrofitVersion",
+    "com.squareup.retrofit2:converter-moshi:$retrofitVersion",
+    'com.squareup.moshi:moshi:1.3.1',
+    "com.squareup.okhttp3:okhttp:$okhttpVersion",
+    "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
+    "com.arello-mobile:moxy:$moxyVersion"
+  ]
+
+  otherDepends = [
+    'com.squareup.picasso:picasso:2.5.3-SNAPSHOT',
+    'com.jakewharton.timber:timber:4.3.1',
+    'uk.co.chrisjenx:calligraphy:2.2.0',
+    'com.makeramen:roundedimageview:2.3.0',
+    "com.jakewharton:butterknife:$butterKnifeVersion",
+    "com.arello-mobile:moxy-app-compat:$moxyVersion"
+  ]
+
+  aptDepends = [
+    "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+  ]
+
+  supportLibDepends = [
+     "com.android.support:appcompat-v7:$supportLibVersion",
+     "com.android.support:cardview-v7:$supportLibVersion",
+     "com.android.support:recyclerview-v7:$supportLibVersion",
+     "com.android.support:design:$supportLibVersion"
+  ]
+
+  leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+  leakCanaryNoOp = "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+}
