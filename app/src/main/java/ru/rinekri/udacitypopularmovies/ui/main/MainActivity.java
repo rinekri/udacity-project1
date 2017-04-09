@@ -42,10 +42,12 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   @Override
   protected void initView() {
-    contentAdapter = new MainAdapter(R.layout.item_main);
+    contentAdapter = new MainAdapter(
+      R.layout.item_main,
+      movieInfo -> presenter.onMoviePosterClicked(movieInfo)
+    );
     contentView.setAdapter(contentAdapter);
-    RecyclerView.LayoutManager manager = new GridLayoutManager(this, GRID_COLUMNS);
-    contentView.setLayoutManager(manager);
+    contentView.setLayoutManager(new GridLayoutManager(this, GRID_COLUMNS));
   }
 
   @Override
