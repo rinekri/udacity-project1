@@ -1,4 +1,4 @@
-package ru.rinekri.udacitypopularmovies.network.network_interceptors;
+package ru.rinekri.udacitypopularmovies.network.interceptors;
 
 import java.io.IOException;
 

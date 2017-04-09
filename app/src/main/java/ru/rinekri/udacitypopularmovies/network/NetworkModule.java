@@ -15,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.annotations.ApplicationScope;
 import ru.rinekri.udacitypopularmovies.network.json_adapters.MoshiAutoValueAdapterFactory;
-import ru.rinekri.udacitypopularmovies.network.network_interceptors.ApiRequestInterceptor;
+import ru.rinekri.udacitypopularmovies.network.interceptors.ApiRequestInterceptor;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.API_VERSION;
