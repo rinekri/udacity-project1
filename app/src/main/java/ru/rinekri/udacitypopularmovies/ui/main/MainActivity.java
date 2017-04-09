@@ -8,8 +8,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import butterknife.BindView;
 import ru.rinekri.udacitypopularmovies.R;
+import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
+import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
 
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.GRID_COLUMNS;
 
@@ -24,7 +26,10 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   @ProvidePresenter
   public MainPresenter providePresenter() {
-    return new MainPresenter();
+    MainRouter router = new MainRouter(this);
+    MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
+    MainInputInteractor interactor = new MainInputInteractor(api);
+    return new MainPresenter(router, interactor);
   }
 
   @Override

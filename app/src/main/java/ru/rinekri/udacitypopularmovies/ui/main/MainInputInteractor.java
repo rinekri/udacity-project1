@@ -6,9 +6,10 @@ import java.util.List;
 
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
+import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
-public class MainInputInteractor implements SyncInteractor<MovieSortType, List<MovieInfo>> {
+public class MainInputInteractor implements SyncInteractor<MovieSortType, MainPM> {
 
   private MainServiceApi mMainServiceApi;
 
@@ -17,13 +18,16 @@ public class MainInputInteractor implements SyncInteractor<MovieSortType, List<M
   }
 
   @Override
-  public List<MovieInfo> getData(@NonNull MovieSortType type) throws Exception {
+  public MainPM getData(@NonNull MovieSortType type) throws Exception {
+    List<MovieInfo> movies = null;
+
     switch (type) {
       case TopRated:
-        return mMainServiceApi.getTopRatedMovies().execute().body().results();
+        movies = mMainServiceApi.getTopRatedMovies().execute().body().results();
+        break;
       case Popular:
-        return mMainServiceApi.getPopularMovies().execute().body().results();
+        movies = mMainServiceApi.getPopularMovies().execute().body().results();
     }
-    throw new UnsupportedOperationException("expected " + type + " doens't support");
+    return new AutoValue_MainPM(movies);
   }
 }
