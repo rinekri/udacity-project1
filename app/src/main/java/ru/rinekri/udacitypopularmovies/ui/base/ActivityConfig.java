@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import com.google.auto.value.AutoValue;
@@ -16,8 +17,8 @@ public abstract class ActivityConfig {
 
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder contentRes(@LayoutRes Integer value);
-    public abstract Builder titleRes(@StringRes Integer value);
+    public abstract Builder contentRes(@LayoutRes @NonNull Integer value);
+    public abstract Builder titleRes(@StringRes @NonNull Integer value);
     public abstract ActivityConfig build();
   }
 }
