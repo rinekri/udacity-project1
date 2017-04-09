@@ -6,18 +6,17 @@ import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class MyApplication extends Application {
-
   public ApplicationComponent appComponent;
 
   @Override
   public void onCreate() {
+    setupAppComponent();
     setupLogs();
     setupCalligraphy();
-    setupAppCompnent();
     super.onCreate();
   }
 
-  private void setupAppCompnent() {
+  private void setupAppComponent() {
     appComponent = DaggerApplicationComponent.builder()
       .applicationModule(new ApplicationModule(this))
       .build();

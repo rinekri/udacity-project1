@@ -24,6 +24,7 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     initView();
   }
 
+  //TODO: Add logic to manage ELCE states
   @Override
   public void showContent(D data) {}
 

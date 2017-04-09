@@ -13,7 +13,6 @@ import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
 public class MainActivity extends BaseMvpActivity<Foo> implements MainView {
-
   @BindView(R.id.text_view)
   TextView textView;
 
@@ -21,7 +20,7 @@ public class MainActivity extends BaseMvpActivity<Foo> implements MainView {
   public MainPresenter presenter;
 
   @ProvidePresenter
-  public MainPresenter providePresnter() {
+  public MainPresenter providePresenter() {
     return new MainPresenter();
   }
 
