@@ -7,6 +7,7 @@ import com.squareup.moshi.Moshi;
 
 import java.util.List;
 
+//TODO: Fix JsonAdapter for model with generic
 @AutoValue
 public abstract class PagedResponse {
   public abstract Integer page();
