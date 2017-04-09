@@ -26,14 +26,11 @@ public class NetworkModule {
   @Provides
   @ApplicationScope
   OkHttpClient provideOkHttp() {
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HTTP_LOG_LEVEL);
-
     return new OkHttpClient.Builder()
       .readTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
       .writeTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-      .addNetworkInterceptor(loggingInterceptor)
-      .addNetworkInterceptor(new ApiRequestInterceptor())
+      .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HTTP_LOG_LEVEL))
+      .addInterceptor(new ApiRequestInterceptor())
       .build();
   }
 
