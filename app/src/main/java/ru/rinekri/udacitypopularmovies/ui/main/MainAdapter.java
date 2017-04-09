@@ -1,40 +1,38 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.LayoutRes;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
-public class MainAdapter<D> extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
-  private List<D> data = new ArrayList<D>();
+import butterknife.BindView;
+import ru.rinekri.udacitypopularmovies.R;
+import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
+import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseSimpleAdapter;
+import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseViewHolder;
 
-  public void swapContent(List<D> newData) {
-    data.clear();
-    data.addAll(newData);
-    notifyDataSetChanged();
+public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolder> {
+  public MainAdapter(@LayoutRes Integer itemLayoutRes) {
+    super(itemLayoutRes);
   }
 
   @Override
-  public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    //TODO: Add logic to create ViewHolder and bind them
-    return null;
+  protected MainViewHolder createViewHolder(View itemView) {
+    return new MainViewHolder(itemView);
   }
 
-  @Override
-  public void onBindViewHolder(MainViewHolder holder, int position) {
+  public class MainViewHolder extends BaseViewHolder<MovieInfo> {
+    @BindView(R.id.movie_poster)
+    ImageView poster;
 
-  }
-
-  @Override
-  public int getItemCount() {
-    return data.size();
-  }
-
-  public class MainViewHolder extends RecyclerView.ViewHolder {
     public MainViewHolder(View itemView) {
       super(itemView);
+    }
+
+    @Override
+    public void fill(MovieInfo item) {
+      Picasso.with(poster.getContext()).load(item.posterPath());
     }
   }
 }

@@ -11,28 +11,28 @@ import java.util.List;
 
 @AutoValue
 public abstract class MovieInfo implements Parcelable {
-  abstract Long id();
+  public abstract Long id();
   @Json(name = "poster_path")
-  abstract String posterPath();
-  abstract Boolean adult();
-  abstract String overview();
+  public abstract String posterPath();
+  public abstract Boolean adult();
+  public abstract String overview();
   @Json(name = "release_date")
-  abstract String releaseDate();
+  public abstract String releaseDate();
   @Json(name = "genre_ids")
-  abstract List<Integer> genreIds();
+  public abstract List<Integer> genreIds();
   @Json(name = "original_title")
-  abstract String originalTitle();
-  abstract String title();
+  public abstract String originalTitle();
+  public abstract String title();
   @Json(name = "original_language")
-  abstract String originalLanguage();
+  public abstract String originalLanguage();
   @Json(name = "backdrop_path")
-  abstract String backdropPath();
-  abstract String popularity();
+  public abstract String backdropPath();
+  public abstract String popularity();
   @Json(name = "vote_count")
-  abstract String voteCount();
-  abstract String video();
+  public abstract String voteCount();
+  public abstract String video();
   @Json(name = "vote_average")
-  abstract String voteAverage();
+  public abstract String voteAverage();
 
   public static JsonAdapter<MovieInfo> jsonAdapter(Moshi moshi) {
     return new AutoValue_MovieInfo.MoshiJsonAdapter(moshi);

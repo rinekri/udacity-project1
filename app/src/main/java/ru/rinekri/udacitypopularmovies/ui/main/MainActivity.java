@@ -8,7 +8,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import butterknife.BindView;
 import ru.rinekri.udacitypopularmovies.R;
-import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
@@ -18,7 +17,7 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   @BindView(R.id.main_content_view)
   RecyclerView contentView;
 
-  MainAdapter<MovieInfo> contentAdapter;
+  MainAdapter contentAdapter;
 
   @InjectPresenter
   public MainPresenter presenter;
@@ -32,13 +31,13 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   protected ActivityConfig provideActivityConfig() {
     return ActivityConfig.builder()
       .contentRes(R.layout.content_main)
-      .titleRes(R.string.app_name)
+      .titleRes(R.string.main_title)
       .build();
   }
 
   @Override
   protected void initView() {
-    contentAdapter = new MainAdapter<>();
+    contentAdapter = new MainAdapter(R.layout.item_main);
     contentView.setAdapter(contentAdapter);
     RecyclerView.LayoutManager manager = new GridLayoutManager(this, GRID_COLUMNS);
     contentView.setLayoutManager(manager);
