@@ -9,7 +9,7 @@ import butterknife.ButterKnife;
 abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements BaseMvpView<D> {
 
   protected abstract ActivityConfig provideActivityConfig();
-  protected abstract void initView();
+  protected void initView() {}
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

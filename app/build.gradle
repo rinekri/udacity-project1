@@ -30,7 +30,8 @@ android {
     versionName "1.0"
     signingConfig signingConfigs.debug
 
-    buildConfigField 'String', 'DEFAULT_BASE_URL', '"https://api.themoviedb.org/"'
+    buildConfigField 'String', 'API_BASE_URL', '"https://api.themoviedb.org"'
+    buildConfigField 'String', 'IMAGE_STORE_BASE_URL', '"http://image.tmdb.org"'
     buildConfigField 'String', 'DB_MOVIE_API_KEY', '"' + getApiKey() + '"'
   }
 
