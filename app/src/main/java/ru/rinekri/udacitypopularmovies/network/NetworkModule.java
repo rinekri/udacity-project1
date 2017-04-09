@@ -1,21 +1,20 @@
 package ru.rinekri.udacitypopularmovies.network;
 
-import android.net.Uri;
-
 import com.squareup.moshi.Moshi;
 
 import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.annotations.ApplicationScope;
-import ru.rinekri.udacitypopularmovies.network.json_adapters.MoshiAutoValueAdapterFactory;
 import ru.rinekri.udacitypopularmovies.network.interceptors.ApiRequestInterceptor;
+import ru.rinekri.udacitypopularmovies.network.json_adapters.MoshiAutoValueAdapterFactory;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.API_VERSION;
@@ -50,15 +49,16 @@ public class NetworkModule {
   @ApplicationScope
   Retrofit provideRetrofit(OkHttpClient okHttpClient,
                            Moshi moshi) {
-    Uri baseUrl = Uri.parse(BuildConfig.DEFAULT_BASE_URL)
-      .buildUpon()
-      .appendPath(API_VERSION)
+    HttpUrl baseUrl = HttpUrl
+      .parse(BuildConfig.DEFAULT_BASE_URL)
+      .newBuilder()
+      .addPathSegment(API_VERSION + "/")
       .build();
 
     return new Retrofit.Builder()
       .client(okHttpClient)
       .addConverterFactory(MoshiConverterFactory.create(moshi))
-      .baseUrl(baseUrl.toString())
+      .baseUrl(baseUrl)
       .build();
   }
 
