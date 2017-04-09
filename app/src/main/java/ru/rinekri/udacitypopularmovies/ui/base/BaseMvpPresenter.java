@@ -10,6 +10,7 @@ import java.util.List;
 import java8.util.function.Consumer;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.ui.base.functions.UnsafeSupplier;
+import timber.log.Timber;
 
 abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpPresenter<V> {
   protected List<AsyncTask> networkRequests = new ArrayList<>();
@@ -54,7 +55,7 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
     request.execute();
   }
 
-  public class NetworkRequest extends AsyncTask<Void, Object, D> {
+  public class NetworkRequest extends AsyncTask<Object, Void, D> {
     private Runnable beforeLoadingAction1;
     private Consumer<D> endLoadingAction;
     private UnsafeSupplier<D> loadingAction;
@@ -76,10 +77,11 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
     }
 
     @Override
-    protected D doInBackground(Void... params) {
+    protected D doInBackground(Object... params) {
       try {
         return loadingAction.get();
       } catch (Exception ex) {
+        Timber.e("Loading error occurred: %s", ex.getMessage());
         errorAction.accept(ex);
       }
       return null;

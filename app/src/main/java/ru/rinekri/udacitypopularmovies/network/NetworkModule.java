@@ -52,13 +52,13 @@ public class NetworkModule {
     HttpUrl baseUrl = HttpUrl
       .parse(BuildConfig.DEFAULT_BASE_URL)
       .newBuilder()
-      .addPathSegment(API_VERSION + "/")
+      .addPathSegment(API_VERSION)
       .build();
 
     return new Retrofit.Builder()
       .client(okHttpClient)
       .addConverterFactory(MoshiConverterFactory.create(moshi))
-      .baseUrl(baseUrl)
+      .baseUrl(baseUrl + "/")
       .build();
   }
 
