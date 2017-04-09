@@ -16,6 +16,7 @@ import ru.rinekri.udacitypopularmovies.annotations.ApplicationScope;
 import ru.rinekri.udacitypopularmovies.network.interceptors.ApiRequestInterceptor;
 import ru.rinekri.udacitypopularmovies.network.json_adapters.MoshiAutoValueAdapterFactory;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
+import ru.rinekri.udacitypopularmovies.network.type_adapters.PosterPathAdapter;
 
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.API_VERSION;
 import static ru.rinekri.udacitypopularmovies.network.NetworkConstants.DEFAULT_CONNECT_TIMEOUT;
@@ -39,6 +40,7 @@ public class NetworkModule {
   Moshi provideMoshi() {
     return new Moshi.Builder()
       .add(MoshiAutoValueAdapterFactory.create())
+      .add(new PosterPathAdapter())
       .build();
   }
 
@@ -47,7 +49,7 @@ public class NetworkModule {
   Retrofit provideRetrofit(OkHttpClient okHttpClient,
                            Moshi moshi) {
     HttpUrl baseUrl = HttpUrl
-      .parse(BuildConfig.DEFAULT_BASE_URL)
+      .parse(BuildConfig.API_BASE_URL)
       .newBuilder()
       .addPathSegment(API_VERSION)
       .build();
