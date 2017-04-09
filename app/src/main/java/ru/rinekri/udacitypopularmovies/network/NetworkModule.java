@@ -29,8 +29,8 @@ public class NetworkModule {
     return new OkHttpClient.Builder()
       .readTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
       .writeTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-      .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HTTP_LOG_LEVEL))
       .addInterceptor(new ApiRequestInterceptor())
+      .addInterceptor(new HttpLoggingInterceptor().setLevel(HTTP_LOG_LEVEL))
       .build();
   }
 
