@@ -29,14 +29,18 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
     @BindView(R.id.movie_title)
     TextView title;
 
-
     public MainViewHolder(View itemView) {
       super(itemView);
     }
 
     @Override
     public void fill(MovieInfo item) {
-      Picasso.with(poster.getContext()).load(item.posterPath());
+      //TODO: Add error handling and placeholder showing
+      Picasso
+        .with(poster.getContext())
+        .load(item.posterPath())
+        .into(poster);
+
       title.setText(item.title());
     }
   }

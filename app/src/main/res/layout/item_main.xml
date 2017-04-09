@@ -3,14 +3,18 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="wrap_content">
+    <!--TODO: Remove odd TextView-->
     <TextView
         android:id="@+id/movie_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:visibility="gone"
         tools:text="Test test"/>
     <ImageView
+        android:adjustViewBounds="true"
         android:id="@+id/movie_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitStart"/>
 </FrameLayout>
