@@ -8,11 +8,11 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import butterknife.BindView;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.R;
-import ru.rinekri.udacitypopularmovies.network.models.Foo;
+import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
-public class MainActivity extends BaseMvpActivity<Foo> implements MainView {
+public class MainActivity extends BaseMvpActivity<MovieInfo> implements MainView {
   @BindView(R.id.text_view)
   TextView textView;
 
