@@ -8,19 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java8.util.function.Consumer;
-import java8.util.function.Supplier;
 import java8.util.stream.StreamSupport;
+import ru.rinekri.udacitypopularmovies.ui.base.functions.UnsafeSupplier;
 
-abstract public class BaseMvpPresenter<V extends BaseMvpView<?>> extends MvpPresenter<V> {
+abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpPresenter<V> {
   protected List<AsyncTask> networkRequests = new ArrayList<>();
 
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    loadContent();
   }
-
-  protected abstract void loadContent();
 
   @Override
   public void onDestroy() {
@@ -31,29 +28,45 @@ abstract public class BaseMvpPresenter<V extends BaseMvpView<?>> extends MvpPres
     super.onDestroy();
   }
 
-  protected <RESULT> void makeRequest(Runnable beforeLoadingAction,
-                                      Consumer<RESULT> afterLoadingAction,
-                                      Supplier<RESULT> loadingAsyncAction,
-                                      Consumer<Throwable> errorAction) {
+  protected void elceNetworkRequest(UnsafeSupplier<D> loadingAction) {
+    elceNetworkRequest(
+      loadingAction,
+      (error) -> getViewState().showError(error.getMessage()));
+  }
 
-    AsyncTask request = new NetworkRequest<>(beforeLoadingAction, afterLoadingAction, loadingAsyncAction, errorAction);
+  protected void elceNetworkRequest(UnsafeSupplier<D> loadingAction,
+                                    Consumer<Throwable> errorAction) {
+    networkRequest(
+      () -> getViewState().showLoading(),
+      (result) -> getViewState().showContent(result),
+      loadingAction,
+      errorAction);
+  }
+
+  protected void networkRequest(Runnable beforeLoadingAction,
+                                Consumer<D> endLoadingAction,
+                                UnsafeSupplier<D> loadingAction,
+                                Consumer<Throwable> errorAction) {
+
+    AsyncTask request = new NetworkRequest(beforeLoadingAction, endLoadingAction,
+      loadingAction, errorAction);
     networkRequests.add(request);
     request.execute();
   }
 
-  public class NetworkRequest<RESULT> extends AsyncTask<Void, Object, RESULT> {
+  public class NetworkRequest extends AsyncTask<Void, Object, D> {
     private Runnable beforeLoadingAction1;
-    private Consumer<RESULT> afterLoadingAction;
-    private Supplier<RESULT> loadingAsyncAction;
+    private Consumer<D> endLoadingAction;
+    private UnsafeSupplier<D> loadingAction;
     private Consumer<Throwable> errorAction;
 
     public NetworkRequest(Runnable beforeLoadingAction,
-                          Consumer<RESULT> afterLoadingAction,
-                          Supplier<RESULT> loadingAsyncAction,
+                          Consumer<D> endLoadingAction,
+                          UnsafeSupplier<D> loadingAction,
                           Consumer<Throwable> errorAction) {
       this.beforeLoadingAction1 = beforeLoadingAction;
-      this.loadingAsyncAction = loadingAsyncAction;
-      this.afterLoadingAction = afterLoadingAction;
+      this.loadingAction = loadingAction;
+      this.endLoadingAction = endLoadingAction;
       this.errorAction = errorAction;
     }
 
@@ -63,9 +76,9 @@ abstract public class BaseMvpPresenter<V extends BaseMvpView<?>> extends MvpPres
     }
 
     @Override
-    protected RESULT doInBackground(Void... params) {
+    protected D doInBackground(Void... params) {
       try {
-        return loadingAsyncAction.get();
+        return loadingAction.get();
       } catch (Exception ex) {
         errorAction.accept(ex);
       }
@@ -73,9 +86,9 @@ abstract public class BaseMvpPresenter<V extends BaseMvpView<?>> extends MvpPres
     }
 
     @Override
-    protected void onPostExecute(RESULT result) {
+    protected void onPostExecute(D result) {
       if (result != null) {
-        afterLoadingAction.accept(result);
+        endLoadingAction.accept(result);
       }
     }
   }

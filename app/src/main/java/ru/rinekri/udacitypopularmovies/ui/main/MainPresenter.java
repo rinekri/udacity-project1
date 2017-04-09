@@ -8,7 +8,7 @@ import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 
 @InjectViewState
-public class MainPresenter extends BaseMvpPresenter<MainView> {
+public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
 
   private MainRouter router;
   private SyncInteractor<MovieSortType, MainPM> interactor;
@@ -20,8 +20,9 @@ public class MainPresenter extends BaseMvpPresenter<MainView> {
   }
 
   @Override
-  protected void loadContent() {
-
+  protected void onFirstViewAttach() {
+    super.onFirstViewAttach();
+    elceNetworkRequest(() -> interactor.getData(MovieSortType.Popular));
   }
 
   public void onMoviePosterClicked(MovieInfo movieInfo) {
