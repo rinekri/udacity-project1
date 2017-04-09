@@ -3,6 +3,7 @@ package ru.rinekri.udacitypopularmovies.ui.main;
 import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +26,9 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
   public class MainViewHolder extends BaseViewHolder<MovieInfo> {
     @BindView(R.id.movie_poster)
     ImageView poster;
+    @BindView(R.id.movie_title)
+    TextView title;
+
 
     public MainViewHolder(View itemView) {
       super(itemView);
@@ -33,6 +37,7 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
     @Override
     public void fill(MovieInfo item) {
       Picasso.with(poster.getContext()).load(item.posterPath());
+      title.setText(item.title());
     }
   }
 }
