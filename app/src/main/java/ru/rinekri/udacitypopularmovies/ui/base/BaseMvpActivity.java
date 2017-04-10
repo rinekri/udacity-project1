@@ -20,20 +20,22 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     ActivityConfig config = provideActivityConfig();
 
     setContentView(config.contentRes());
-    initActionBar(getSupportActionBar(), config);
+    initActionBar(config);
     ButterKnife.bind(this);
     initView();
   }
 
-  private void initActionBar(ActionBar actionBar, ActivityConfig config) {
+  private void initActionBar(ActivityConfig config) {
     //TODO: Transfer Toolbar and AppBar from each layout to shell
     Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
     setSupportActionBar(toolbar);
+
+    final ActionBar ab = getSupportActionBar();
     if (config.titleRes() != 0) {
-      actionBar.setTitle(config.titleRes());
+      ab.setTitle(config.titleRes());
     }
     if (!config.titleText().trim().equals("")) {
-      actionBar.setTitle(config.titleText());
+      ab.setTitle(config.titleText());
     }
   }
 
