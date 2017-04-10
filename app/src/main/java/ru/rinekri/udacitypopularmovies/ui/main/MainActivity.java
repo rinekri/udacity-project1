@@ -17,7 +17,7 @@ import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.GRID_COLUMNS;
 
 public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
-  
+
   @BindView(R.id.main_content_view)
   RecyclerView contentView;
 
