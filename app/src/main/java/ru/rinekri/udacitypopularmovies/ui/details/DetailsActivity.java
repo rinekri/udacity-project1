@@ -23,22 +23,24 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
     context.startActivity(intent);
   }
 
+  @NonNull
+  private MovieShortInfo getStartData() {
+    return getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
+  }
+
   @InjectPresenter
   public DetailsPresenter presenter;
 
   @ProvidePresenter
   public DetailsPresenter providePresenter() {
-    MovieShortInfo shortInfo = getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
-    return new DetailsPresenter(shortInfo);
+    return new DetailsPresenter(getStartData());
   }
 
   @Override
   protected ActivityConfig provideActivityConfig() {
-    MovieShortInfo shortInfo = getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
-
     return ActivityConfig.builder()
       .contentRes(R.layout.content_details)
-      .titleText(shortInfo.title())
+      .titleText(getStartData().title())
       .build();
   }
 }
