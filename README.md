@@ -15,3 +15,19 @@ Movie details layout contains **title**, **release date**, **movie poster**, **v
 When a user changes the sort criteria (“most popular and highest rated”) the main view gets updated correctly. | In Progress
 When a movie poster thumbnail is selected, the movie details screen is launched. | Resolved
 In a background thread, app queries the **/movie/popular** or **/movie/top_rated** API for the sort criteria specified in the settings menu. | Resolved
+
+## Libs, plugins, extensions
+Retrofit</br>
+Moshi</br>
+OkHttp3</br>
+Moxy</br>
+AutoValue</br>
+AutoParcel</br>
+Dagger2</br>
+Picasso</br>
+Timber</br>
+Calligraphy</br>
+ButterKnife</br>
+Support Libs</br>
+StreamsSupport</br>
+retrolambda</br>
