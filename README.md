@@ -10,7 +10,7 @@ Goal | Progress
 ------------ | -------------
 Movies are displayed in the main layout via a grid of their corresponding movie poster thumbnails. | Resolved 
 UI contains an element (i.e a spinner or settings menu) to toggle the sort order of the movies by: most popular, highest rated. | In Progress
-UI contains a screen for displaying the details for a selected movie. | In Progress
+UI contains a screen for displaying the details for a selected movie. | Resolved
 Movie details layout contains **title**, **release date**, **movie poster**, **vote average**, and **plot synopsis**. | Resolved
 When a user changes the sort criteria (“most popular and highest rated”) the main view gets updated correctly. | In Progress
 When a movie poster thumbnail is selected, the movie details screen is launched. | Resolved
