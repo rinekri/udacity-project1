@@ -1,6 +1,8 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
@@ -17,11 +19,20 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     ActivityConfig config = provideActivityConfig();
 
     setContentView(config.contentRes());
-    if (getActionBar() != null) {
-      getActionBar().setTitle(config.titleRes());
+    if (getSupportActionBar() != null) {
+      initActionBar(getSupportActionBar(), config);
     }
     ButterKnife.bind(this);
     initView();
+  }
+
+  private void initActionBar(@NonNull ActionBar actionBar, ActivityConfig config) {
+    if (config.titleRes() != 0) {
+      actionBar.setTitle(config.titleRes());
+    }
+    if (!config.titleText().trim().equals("")) {
+      actionBar.setTitle(config.titleText());
+    }
   }
 
   //TODO: Add logic to manage ELCE states

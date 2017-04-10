@@ -23,7 +23,6 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
     context.startActivity(intent);
   }
 
-
   @InjectPresenter
   public DetailsPresenter presenter;
 
@@ -35,9 +34,11 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
 
   @Override
   protected ActivityConfig provideActivityConfig() {
+    MovieShortInfo shortInfo = getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
+
     return ActivityConfig.builder()
       .contentRes(R.layout.content_details)
-      .titleRes(R.string.main_title)
+      .titleText(shortInfo.title())
       .build();
   }
 }
