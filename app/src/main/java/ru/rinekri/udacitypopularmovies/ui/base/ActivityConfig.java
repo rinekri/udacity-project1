@@ -8,6 +8,10 @@ import com.google.auto.value.AutoValue;
 
 @AutoValue
 public abstract class ActivityConfig {
+  //TODO 1: Add logic to specify ELCE views
+  //TODO 2: Add logic to change Toolbar Icon
+  //TODO 3: Add logic to inflate shell
+
   @NonNull
   public abstract Integer contentRes();
   @StringRes
