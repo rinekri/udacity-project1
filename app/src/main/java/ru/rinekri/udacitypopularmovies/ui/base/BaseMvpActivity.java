@@ -37,6 +37,7 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     if (!config.titleText().trim().equals("")) {
       ab.setTitle(config.titleText());
     }
+    ab.setDisplayHomeAsUpEnabled(config.useBackButton());
   }
 
   //TODO: Add logic to manage ELCE states

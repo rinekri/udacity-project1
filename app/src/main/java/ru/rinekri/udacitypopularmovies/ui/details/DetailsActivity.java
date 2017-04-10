@@ -54,6 +54,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
     return ActivityConfig.builder()
       .contentRes(R.layout.shell_coordinator)
       .titleText(getStartData().title())
+      .useBackButton(true)
       .build();
   }
 
