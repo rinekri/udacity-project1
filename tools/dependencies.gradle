@@ -29,7 +29,8 @@ ext {
     'uk.co.chrisjenx:calligraphy:2.2.0',
     'com.makeramen:roundedimageview:2.3.0',
     "com.jakewharton:butterknife:$butterKnifeVersion",
-    "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    "com.arello-mobile:moxy-app-compat:$moxyVersion",
+    'jp.wasabeef:picasso-transformations:2.1.2'
   ]
 
   aptDepends = [

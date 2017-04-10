@@ -1,3 +1,4 @@
 <resources>
     <dimen name="base_padding">16dp</dimen>
+    <dimen name="detail_backdrop_height">250dp</dimen>
 </resources>

@@ -2,8 +2,8 @@ package ru.rinekri.udacitypopularmovies.ui.main;
 
 import android.content.Context;
 
-import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
-import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
+import ru.rinekri.udacitypopularmovies.ui.details.DetailsActivity;
+import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 
 public class MainRouter {
   private Context context;
@@ -12,7 +12,7 @@ public class MainRouter {
     this.context = context;
   }
 
-  public void showDetailInfo(MovieInfo movieInfo) {
-    ContextUtils.showMessage(context, "TODO: showDetailInfo");
+  public void showDetailInfo(MovieShortInfo movieInfo) {
+    DetailsActivity.start(context, movieInfo);
   }
 }

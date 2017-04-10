@@ -11,7 +11,7 @@ public class ContextUtils {
     return ((MyApplication) context.getApplicationContext()).appComponent;
   }
 
-  public static void showMessage(Context context, String message) {
+  public static void showToastMessage(Context context, String message) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
   }
 }

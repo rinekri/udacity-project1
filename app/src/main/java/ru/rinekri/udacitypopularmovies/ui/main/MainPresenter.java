@@ -6,6 +6,7 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
+import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 
 @InjectViewState
 public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
@@ -27,6 +28,10 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   }
 
   public void onMoviePosterClicked(MovieInfo movieInfo) {
-    router.showDetailInfo(movieInfo);
+    router.showDetailInfo(MovieShortInfo.from(movieInfo));
+  }
+
+  public void onMoviePosterLongClicked(MovieInfo movieInfo) {
+    getViewState().showMessage(movieInfo.originalTitle());
   }
 }
