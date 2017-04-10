@@ -52,7 +52,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
   @Override
   protected ActivityConfig provideActivityConfig() {
     return ActivityConfig.builder()
-      .contentRes(R.layout.shell_coordinator)
+      .contentRes(R.layout.content_details)
       .titleText(getStartData().title())
       .useBackButton(true)
       .build();
