@@ -1,7 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,11 +15,19 @@ import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseSimpleAdapter;
 import ru.rinekri.udacitypopularmovies.ui.base.recycler_view.BaseViewHolder;
 
 public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainViewHolder> {
-  @Nullable
   private Consumer<MovieInfo> onPosterClickAction;
+  private Consumer<MovieInfo> onPosterLongClickAction;
 
   public MainAdapter(@LayoutRes Integer itemLayoutRes,
-                     @Nullable Consumer<MovieInfo> onPosterClickAction) {
+                     @NonNull Consumer<MovieInfo> onPosterClickAction,
+                     @NonNull Consumer<MovieInfo> onPosterLongClickAction) {
+    super(itemLayoutRes);
+    this.onPosterClickAction = onPosterClickAction;
+    this.onPosterLongClickAction = onPosterLongClickAction;
+  }
+
+  public MainAdapter(@LayoutRes Integer itemLayoutRes,
+                     @NonNull Consumer<MovieInfo> onPosterClickAction) {
     super(itemLayoutRes);
     this.onPosterClickAction = onPosterClickAction;
   }
@@ -53,6 +61,12 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
         if (MainAdapter.this.onPosterClickAction != null) {
           MainAdapter.this.onPosterClickAction.accept(item);
         }
+      });
+      itemView.setOnLongClickListener(view -> {
+        if (MainAdapter.this.onPosterLongClickAction != null) {
+          onPosterLongClickAction.accept(item);
+        }
+        return true;
       });
     }
   }

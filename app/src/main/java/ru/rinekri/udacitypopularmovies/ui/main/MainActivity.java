@@ -44,7 +44,8 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   protected void initView() {
     contentAdapter = new MainAdapter(
       R.layout.item_main,
-      movieInfo -> presenter.onMoviePosterClicked(movieInfo)
+      movieInfo -> presenter.onMoviePosterClicked(movieInfo),
+      movieInfo -> presenter.onMoviePosterLongClicked(movieInfo)
     );
     contentView.setAdapter(contentAdapter);
     contentView.setLayoutManager(new GridLayoutManager(this, GRID_COLUMNS));
@@ -54,5 +55,10 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   public void showContent(MainPM data) {
     super.showContent(data);
     contentAdapter.swapContent(data.movies());
+  }
+
+  @Override
+  public void showMessage(String text) {
+    ContextUtils.showSnackMessage(contentView, text);
   }
 }

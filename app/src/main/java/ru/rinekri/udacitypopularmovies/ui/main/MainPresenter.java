@@ -30,4 +30,8 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   public void onMoviePosterClicked(MovieInfo movieInfo) {
     router.showDetailInfo(MovieShortInfo.from(movieInfo));
   }
+
+  public void onMoviePosterLongClicked(MovieInfo movieInfo) {
+    getViewState().showMessage(movieInfo.originalTitle());
+  }
 }
