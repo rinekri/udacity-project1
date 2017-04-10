@@ -12,10 +12,12 @@ import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
+import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.GRID_COLUMNS;
 
 public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
+  
   @BindView(R.id.main_content_view)
   RecyclerView contentView;
 
@@ -59,6 +61,6 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   @Override
   public void showMessage(String text) {
-    ContextUtils.showSnackMessage(contentView, text);
+    ViewUtils.showSnackMessage(contentView, text);
   }
 }
