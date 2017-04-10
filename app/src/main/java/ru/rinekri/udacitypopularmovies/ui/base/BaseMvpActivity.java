@@ -1,12 +1,13 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import butterknife.ButterKnife;
+import ru.rinekri.udacitypopularmovies.R;
 
 abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements BaseMvpView<D> {
 
@@ -19,14 +20,15 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     ActivityConfig config = provideActivityConfig();
 
     setContentView(config.contentRes());
-    if (getSupportActionBar() != null) {
-      initActionBar(getSupportActionBar(), config);
-    }
+    initActionBar(getSupportActionBar(), config);
     ButterKnife.bind(this);
     initView();
   }
 
-  private void initActionBar(@NonNull ActionBar actionBar, ActivityConfig config) {
+  private void initActionBar(ActionBar actionBar, ActivityConfig config) {
+    //TODO: Transfer Toolbar and AppBar from each layout to shell
+    Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+    setSupportActionBar(toolbar);
     if (config.titleRes() != 0) {
       actionBar.setTitle(config.titleRes());
     }
