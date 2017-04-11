@@ -56,6 +56,11 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
       ab.setTitle(config.titleText());
     }
     ab.setDisplayHomeAsUpEnabled(config.useBackButton());
+    if (config.useBackButton()) {
+      toolbar.setNavigationOnClickListener(view -> onBackPressed());
+    } else {
+      toolbar.setNavigationOnClickListener(null);
+    }
   }
 
   private void initElceViews(ActivityConfig config) {
