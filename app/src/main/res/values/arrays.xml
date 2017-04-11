@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="main_sort_types">
+        <item>@string/main_sort_popular_movies</item>
+        <item>@string/main_sort_top_rated_movies</item>
+    </array>
+</resources>
