@@ -13,7 +13,10 @@ import ru.rinekri.udacitypopularmovies.R;
 public abstract class ActivityConfig {
   //TODO: Add logic to inflate shell
   @NonNull
-  public abstract Integer contentRes();
+  public abstract Integer contentViewRes();
+  @NonNull
+  @IdRes
+  public abstract Integer contentContainerId();
   @StringRes
   @NonNull
   public abstract Integer titleRes();
@@ -40,13 +43,15 @@ public abstract class ActivityConfig {
       .elceEmptyViewId(R.id.elce_empty_view)
       .elceErrorViewId(R.id.elce_error_view)
       .elceProgressViewId(R.id.elce_progress_view)
+      .contentContainerId(R.id.content_container_view)
       .alignElceCenter(true)
       .useBackButton(false);
   }
 
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder contentRes(@LayoutRes @NonNull Integer value);
+    public abstract Builder contentViewRes(@LayoutRes @NonNull Integer value);
+    public abstract Builder contentContainerId(@IdRes @NonNull Integer value);
     public abstract Builder titleRes(@StringRes @NonNull Integer value);
     public abstract Builder titleText(@NonNull String value);
     public abstract Builder useBackButton(@NonNull Boolean use);

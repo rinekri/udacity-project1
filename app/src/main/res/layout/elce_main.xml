@@ -9,9 +9,9 @@
     <TextView
         android:id="@+id/elce_empty_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:gravity="center"
-        android:padding="@dimen/base_padding"
+        android:layout_height="match_parent"
+        android:padding="@dimen/medium_padding"
         android:textSize="16sp"
         tools:text="dasddsadsad"/>
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:padding="@dimen/base_padding"
+        android:padding="@dimen/medium_padding"
         android:textSize="16sp"
         tools:text="dasddsadsad"/>
 
@@ -29,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="@dimen/base_padding"
+        android:padding="@dimen/medium_padding"
         android:textSize="16sp"/>
 </FrameLayout>
