@@ -13,6 +13,4 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 abstract public class MainPM implements Parcelable {
   @Nullable
   abstract List<MovieInfo> movies();
-  abstract Boolean showContent();
-  abstract Boolean initToolbar();
 }
