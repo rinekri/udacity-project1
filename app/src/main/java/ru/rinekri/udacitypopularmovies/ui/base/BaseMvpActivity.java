@@ -35,9 +35,9 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
   }
 
   private void initElceViews(ActivityConfig config) {
-    emptyView = ButterKnife.findById(this, config.emptyViewId());
-    errorView = ButterKnife.findById(this, config.errorViewId());
-    progressView = ButterKnife.findById(this, config.progressViewId());
+//    emptyView = ButterKnife.findById(this, config.emptyViewId());
+//    errorView = ButterKnife.findById(this, config.errorViewId());
+//    progressView = ButterKnife.findById(this, config.progressViewId());
 
     //TODO: Add logic to correctly manage ELCE states with content
   }

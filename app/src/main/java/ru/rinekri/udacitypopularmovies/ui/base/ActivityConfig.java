@@ -22,20 +22,26 @@ public abstract class ActivityConfig {
   @NonNull
   public abstract Boolean useBackButton();
   @NonNull
-  public abstract Integer errorViewId();
+  public abstract Integer elceContainerId();
   @NonNull
-  public abstract Integer emptyViewId();
+  public abstract Integer elceErrorViewId();
   @NonNull
-  public abstract Integer progressViewId();
+  public abstract Integer elceEmptyViewId();
+  @NonNull
+  public abstract Integer elceProgressViewId();
+  @NonNull
+  public abstract Boolean alignElceCenter();
 
   public static Builder builder() {
     return new AutoValue_ActivityConfig.Builder()
       .titleRes(0)
       .titleText("")
-      .useBackButton(false)
-      .errorViewId(R.id.error_view)
-      .emptyViewId(R.id.empty_view)
-      .progressViewId(R.id.progress_view);
+      .elceContainerId(R.id.elce_container)
+      .elceEmptyViewId(R.id.elce_empty_view)
+      .elceErrorViewId(R.id.elce_error_view)
+      .elceProgressViewId(R.id.elce_progress_view)
+      .alignElceCenter(true)
+      .useBackButton(false);
   }
 
   @AutoValue.Builder
@@ -44,9 +50,11 @@ public abstract class ActivityConfig {
     public abstract Builder titleRes(@StringRes @NonNull Integer value);
     public abstract Builder titleText(@NonNull String value);
     public abstract Builder useBackButton(@NonNull Boolean use);
-    public abstract Builder errorViewId(@NonNull @IdRes Integer layoutId);
-    public abstract Builder emptyViewId(@NonNull @IdRes Integer layoutId);
-    public abstract Builder progressViewId(@NonNull @IdRes Integer layoutId);
+    public abstract Builder elceErrorViewId(@NonNull @IdRes Integer id);
+    public abstract Builder elceEmptyViewId(@NonNull @IdRes Integer id);
+    public abstract Builder elceProgressViewId(@NonNull @IdRes Integer id);
+    public abstract Builder elceContainerId(@NonNull @IdRes Integer id);
+    public abstract Builder alignElceCenter(@NonNull Boolean shouldAlign);
     public abstract ActivityConfig build();
   }
 }

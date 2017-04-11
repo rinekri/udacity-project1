@@ -2,12 +2,12 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/elce_content"
+    android:id="@+id/elce_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/empty_view"
+        android:id="@+id/elce_empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -16,7 +16,7 @@
         tools:text="dasddsadsad"/>
 
     <TextView
-        android:id="@+id/error_view"
+        android:id="@+id/elce_error_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -25,7 +25,7 @@
         tools:text="dasddsadsad"/>
 
     <ProgressBar
-        android:id="@+id/progress_view"
+        android:id="@+id/elce_progress_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
