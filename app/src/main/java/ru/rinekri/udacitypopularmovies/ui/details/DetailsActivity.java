@@ -27,6 +27,11 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
     context.startActivity(intent);
   }
 
+  @NonNull
+  private MovieShortInfo getStartData() {
+    return getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
+  }
+
   @BindView(R.id.backdrop)
   ImageView moviePoster;
   @BindView(R.id.details_release_date)
@@ -35,11 +40,6 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
   TextView voteAverage;
   @BindView(R.id.details_overview)
   TextView overview;
-
-  @NonNull
-  private MovieShortInfo getStartData() {
-    return getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
-  }
 
   @InjectPresenter
   public DetailsPresenter presenter;

@@ -25,18 +25,13 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.v4.widget.NestedScrollView
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    <!--TODO: Make ScrollView as parent layout to host states-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include layout="@layout/view_empty"/>
-            <include layout="@layout/view_error"/>
-            <include layout="@layout/view_progress"/>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+        <include layout="@layout/view_empty"/>
+        <include layout="@layout/view_error"/>
+        <include layout="@layout/view_progress"/>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
