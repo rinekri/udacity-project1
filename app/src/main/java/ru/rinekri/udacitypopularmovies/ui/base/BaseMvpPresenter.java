@@ -16,17 +16,16 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
   protected List<AsyncTask> networkRequests = new ArrayList<>();
 
   @Override
-  protected void onFirstViewAttach() {
-    super.onFirstViewAttach();
+  public void onDestroy() {
+    abortNetworkRequests();
+    super.onDestroy();
   }
 
-  @Override
-  public void onDestroy() {
+  protected void abortNetworkRequests() {
     StreamSupport
       .stream(networkRequests)
       .forEach((request) -> request.cancel(true));
     networkRequests.clear();
-    super.onDestroy();
   }
 
   protected void elceNetworkRequest(UnsafeSupplier<D> loadingAction) {

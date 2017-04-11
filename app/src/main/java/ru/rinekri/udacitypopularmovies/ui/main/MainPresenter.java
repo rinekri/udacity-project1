@@ -23,8 +23,7 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    getViewState().showContent(new AutoValue_MainPM(null, false, true));
-    elceNetworkRequest(() -> interactor.getData(MovieSortType.Popular));
+    loadContent(MovieSortType.Popular);
   }
 
   public void onMoviePosterClicked(MovieInfo movieInfo) {
@@ -33,5 +32,14 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
 
   public void onMoviePosterLongClicked(MovieInfo movieInfo) {
     getViewState().showMessage(movieInfo.originalTitle());
+  }
+
+  public void onMovieShortChanged(MovieSortType sortType) {
+    loadContent(sortType);
+  }
+
+  private void loadContent(MovieSortType sortType) {
+    abortNetworkRequests();
+    elceNetworkRequest(() -> interactor.getData(sortType));
   }
 }
