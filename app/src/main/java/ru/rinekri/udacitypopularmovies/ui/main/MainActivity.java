@@ -38,7 +38,6 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   protected ActivityConfig provideActivityConfig() {
     return ActivityConfig.builder()
       .contentViewRes(R.layout.content_main)
-      .titleRes(R.string.main_title)
       .build();
   }
 

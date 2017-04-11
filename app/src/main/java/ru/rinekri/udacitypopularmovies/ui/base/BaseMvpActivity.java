@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
   private TextView emptyView;
   private ProgressBar progressView;
   private View contentView;
+  private Toolbar toolbar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +47,13 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
 
   private void initActionBar(ActivityConfig config) {
     //TODO: Transfer Toolbar and AppBar from each layout to shell
-    Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+    toolbar = ButterKnife.findById(this, R.id.toolbar);
     setSupportActionBar(toolbar);
 
     final ActionBar ab = getSupportActionBar();
     if (config.titleRes() != 0) {
       ab.setTitle(config.titleRes());
-    }
-    if (!config.titleText().trim().equals("")) {
+    } else {
       ab.setTitle(config.titleText());
     }
     ab.setDisplayHomeAsUpEnabled(config.useBackButton());
@@ -115,5 +116,10 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     emptyView.setVisibility(GONE);
     progressView.setVisibility(GONE);
     contentView.setVisibility(VISIBLE);
+  }
+
+  @NonNull
+  protected Toolbar getToolbar() {
+    return toolbar;
   }
 }

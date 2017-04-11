@@ -23,7 +23,7 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    //TODO: Add sorting
+    getViewState().showContent(new AutoValue_MainPM(null, false, true));
     elceNetworkRequest(() -> interactor.getData(MovieSortType.Popular));
   }
 
