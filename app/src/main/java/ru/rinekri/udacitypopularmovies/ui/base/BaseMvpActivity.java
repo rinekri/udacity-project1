@@ -3,25 +3,43 @@ package ru.rinekri.udacitypopularmovies.ui.base;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import butterknife.ButterKnife;
 import ru.rinekri.udacitypopularmovies.R;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements BaseMvpView<D> {
 
   protected abstract ActivityConfig provideActivityConfig();
-  protected void initView() {}
+
+  protected void initView() {
+  }
+
+  private TextView errorView;
+  private TextView emptyView;
+  private ProgressBar progressView;
+  private View contentView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ActivityConfig config = provideActivityConfig();
 
-    setContentView(config.contentRes());
-    initActionBar(config);
+    setContentView(config.contentViewRes());
     ButterKnife.bind(this);
+    initActionBar(config);
+    initElceViews(config);
+    switchToInitState();
     initView();
   }
 
@@ -38,18 +56,64 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
       ab.setTitle(config.titleText());
     }
     ab.setDisplayHomeAsUpEnabled(config.useBackButton());
+    if (config.useBackButton()) {
+      toolbar.setNavigationOnClickListener(view -> onBackPressed());
+    } else {
+      toolbar.setNavigationOnClickListener(null);
+    }
   }
 
-  //TODO: Add logic to manage ELCE states
-  @Override
-  public void showContent(D data) {}
+  private void initElceViews(ActivityConfig config) {
+    emptyView = ButterKnife.findById(this, config.elceEmptyViewId());
+    errorView = ButterKnife.findById(this, config.elceEmptyViewId());
+    progressView = ButterKnife.findById(this, config.elceProgressViewId());
+    contentView = ButterKnife.findById(this, config.contentContainerId());
+    Integer gravity;
+    if (config.alignElceCenter()) {
+      gravity = Gravity.CENTER;
+    } else {
+      gravity = Gravity.CENTER_HORIZONTAL;
+    }
+    emptyView.setGravity(gravity);
+    errorView.setGravity(gravity);
+    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+    params.gravity = gravity;
+    progressView.setLayoutParams(params);
+  }
 
   @Override
-  public void showEmpty() {}
+  public void showContent(D data) {
+    switchToInitState();
+  }
 
   @Override
-  public void showError(String message) {}
+  public void showEmpty() {
+    errorView.setVisibility(GONE);
+    emptyView.setVisibility(VISIBLE);
+    progressView.setVisibility(GONE);
+    contentView.setVisibility(GONE);
+  }
 
   @Override
-  public void showLoading() {}
+  public void showError(String message) {
+    errorView.setVisibility(VISIBLE);
+    emptyView.setVisibility(View.GONE);
+    progressView.setVisibility(GONE);
+    contentView.setVisibility(GONE);
+  }
+
+  @Override
+  public void showLoading() {
+    errorView.setVisibility(View.GONE);
+    emptyView.setVisibility(View.GONE);
+    progressView.setVisibility(VISIBLE);
+    contentView.setVisibility(GONE);
+  }
+
+  private void switchToInitState() {
+    errorView.setVisibility(GONE);
+    emptyView.setVisibility(GONE);
+    progressView.setVisibility(GONE);
+    contentView.setVisibility(VISIBLE);
+  }
 }
