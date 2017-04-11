@@ -19,17 +19,19 @@ import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
 public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements DetailsView {
   private static final String EXTRA_MOVIE_SHORT_INFO = BuildConfig.APPLICATION_ID + ".extra_short_info";
+  private static final String EXTRA_TITLE = BuildConfig.APPLICATION_ID + ".extra_title";
 
   public static void start(Context context,
                            @NonNull MovieShortInfo movieShortInfo) {
     Intent intent = new Intent(context, DetailsActivity.class);
     intent.putExtra(EXTRA_MOVIE_SHORT_INFO, movieShortInfo);
+    intent.putExtra(EXTRA_TITLE, movieShortInfo.title());
     context.startActivity(intent);
   }
 
   @NonNull
-  private MovieShortInfo getStartData() {
-    return getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO);
+  private String getStartTitle() {
+    return getIntent().getStringExtra(EXTRA_TITLE);
   }
 
   @BindView(R.id.backdrop)
@@ -46,30 +48,29 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
 
   @ProvidePresenter
   public DetailsPresenter providePresenter() {
-    return new DetailsPresenter(getStartData());
+    return new DetailsPresenter(getIntent().getParcelableExtra(EXTRA_MOVIE_SHORT_INFO));
   }
 
   @Override
   protected ActivityConfig provideActivityConfig() {
     return ActivityConfig.builder()
       .contentViewRes(R.layout.content_details)
-      .titleText(getStartData().title())
+      .titleText(getStartTitle())
       .useBackButton(true)
       .alignElceCenter(false)
       .build();
   }
 
-  //TODO: Replace to actually MVP pattern
   @Override
-  protected void initView() {
+  public void showContent(DetailsPM data) {
+    super.showContent(data);
     Picasso
       .with(this)
-      .load(getStartData().posterPath())
+      .load(data.movieInfo().posterPath())
       .transform(new BlurTransformation(this))
       .into(moviePoster);
-
-    voteAverage.setText(getStartData().voteAverage());
-    overview.setText(getStartData().overview());
-    releaseDate.setText(getStartData().releaseDate());
+    voteAverage.setText(data.movieInfo().voteAverage());
+    overview.setText(data.movieInfo().overview());
+    releaseDate.setText(data.movieInfo().releaseDate());
   }
 }

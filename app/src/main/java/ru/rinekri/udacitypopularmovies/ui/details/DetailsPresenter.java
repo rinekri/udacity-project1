@@ -9,14 +9,15 @@ import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
 @InjectViewState
 public class DetailsPresenter extends BaseMvpPresenter<DetailsPM, DetailsView> {
   @NonNull
-  private MovieShortInfo mMovieShortInfo;
+  private MovieShortInfo movieShortInfo;
 
   public DetailsPresenter(@NonNull MovieShortInfo movieShortInfo) {
-    mMovieShortInfo = movieShortInfo;
+    this.movieShortInfo = movieShortInfo;
   }
 
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
+    getViewState().showContent(new AutoValue_DetailsPM(movieShortInfo));
   }
 }
