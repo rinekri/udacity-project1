@@ -39,7 +39,7 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   }
 
   public void onMoviePosterLongClicked(MovieInfo movieInfo) {
-    getViewState().showMessage(movieInfo.originalTitle());
+    router.showMessage(movieInfo.originalTitle());
   }
 
   public void onMovieShortChanged(MovieSortType sortType) {

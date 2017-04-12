@@ -18,7 +18,6 @@ import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
 import ru.rinekri.udacitypopularmovies.ui.utils.DialogUtils;
-import ru.rinekri.udacitypopularmovies.ui.utils.ViewUtils;
 
 import static ru.rinekri.udacitypopularmovies.ui.UiConstants.GRID_COLUMNS;
 
@@ -45,7 +44,7 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   @Override
   protected void onStart() {
     super.onStart();
-    presenter.setRouter(new MainRouter(this));
+    presenter.setRouter(new MainRouter(this, contentView));
   }
 
   @Override
@@ -87,10 +86,5 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   public void showContent(MainPM data) {
     super.showContent(data);
     contentAdapter.swapContent(data.movies());
-  }
-
-  @Override
-  public void showMessage(String text) {
-    ViewUtils.showSnackMessage(contentView, text);
   }
 }
