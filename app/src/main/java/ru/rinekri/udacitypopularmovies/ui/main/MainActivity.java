@@ -81,7 +81,8 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
     String initSortName = sortNames[data.sortTypes().indexOf(data.initSortType())];
 
-    sortTypesDialog = DialogUtils.makePopupWindow(MainActivity.this, Arrays.asList(sortNames), toolbarTitle, (position) -> {
+    //TODO: Fix bug with with height
+    sortTypesDialog = DialogUtils.makePopupWindow(this, Arrays.asList(sortNames), toolbarTitle, (position) -> {
       toolbarTitle.setText(sortNames[position]);
       presenter.onMovieSortChanged(data.sortTypes().get(position));
     });
