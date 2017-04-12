@@ -14,16 +14,24 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   private MainRouter router;
   private SyncInteractor<MovieSortType, MainPM> interactor;
 
-  public MainPresenter(MainRouter router,
-                       SyncInteractor<MovieSortType, MainPM> interactor) {
-    this.router = router;
+  public MainPresenter(SyncInteractor<MovieSortType, MainPM> interactor) {
     this.interactor = interactor;
+  }
+
+  void setRouter(MainRouter router) {
+    this.router = router;
   }
 
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
     loadContent(MovieSortType.Popular);
+  }
+
+  @Override
+  public void onDestroy() {
+    router = null;
+    super.onDestroy();
   }
 
   public void onMoviePosterClicked(MovieInfo movieInfo) {

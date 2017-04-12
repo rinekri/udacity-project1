@@ -37,10 +37,15 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   @ProvidePresenter
   public MainPresenter providePresenter() {
-    MainRouter router = new MainRouter(this);
     MainServiceApi api = ContextUtils.appComponent(this).mainServiceApi();
     MainInputInteractor interactor = new MainInputInteractor(api);
-    return new MainPresenter(router, interactor);
+    return new MainPresenter(interactor);
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    presenter.setRouter(new MainRouter(this));
   }
 
   @Override
