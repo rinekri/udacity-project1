@@ -18,6 +18,6 @@ public class DetailsPresenter extends BaseMvpPresenter<DetailsPM, DetailsView> {
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    getViewState().showContent(new AutoValue_DetailsPM(movieShortInfo));
+    getViewState().showViewContent(new AutoValue_DetailsPM(movieShortInfo));
   }
 }

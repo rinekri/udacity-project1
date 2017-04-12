@@ -62,8 +62,8 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
   }
 
   @Override
-  public void showContent(DetailsPM data) {
-    super.showContent(data);
+  public void showViewContent(DetailsPM data) {
+    super.showViewContent(data);
     Picasso
       .with(this)
       .load(data.movieInfo().posterPath())

@@ -1,6 +1,8 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -9,13 +11,12 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import java.util.Arrays;
 
-import butterknife.BindArray;
 import butterknife.BindView;
+import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
 import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
-import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
 import ru.rinekri.udacitypopularmovies.ui.utils.DialogUtils;
 
@@ -25,11 +26,12 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   @BindView(R.id.content_container_view)
   RecyclerView contentView;
-  @BindArray(R.array.main_sort_types)
-  String[] sortTypes;
 
   TextView toolbarTitle;
   MainAdapter contentAdapter;
+  ListPopupWindow sortTypesDialog;
+  @Nullable
+  MainIM initModel;
 
   @InjectPresenter
   public MainPresenter presenter;
@@ -63,28 +65,47 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
     );
     contentView.setAdapter(contentAdapter);
     contentView.setLayoutManager(new GridLayoutManager(this, GRID_COLUMNS));
-    toolbarTitle = (TextView) getLayoutInflater().inflate(R.layout.view_spinner, null);
-    getToolbar().addView(toolbarTitle);
-    //TODO: Transfer showing control to presenter
-    toolbarTitle.setText(sortTypes[0]);
-    toolbarTitle.setOnClickListener(view -> {
-      DialogUtils.makePopupWindow(this, Arrays.asList(sortTypes), toolbarTitle, (position) -> {
-        toolbarTitle.setText(sortTypes[position]);
-        switch (position) {
-          case 0:
-            presenter.onMovieSortChanged(MovieSortType.Popular);
-            break;
-          case 1:
-            presenter.onMovieSortChanged(MovieSortType.TopRated);
-            break;
-        }
-      }).show();
-    });
   }
 
   @Override
-  public void showContent(MainPM data) {
-    super.showContent(data);
+  public void showInitContent(MainIM data) {
+    initModel = data;
+    toolbarTitle = (TextView) getLayoutInflater().inflate(R.layout.view_spinner, null);
+    getToolbar().removeAllViews();
+    getToolbar().addView(toolbarTitle);
+
+    String[] sortNames = StreamSupport
+      .stream(data.sortTypes())
+      .map(sortType -> sortType.reolveName(this))
+      .toArray(String[]::new);
+
+    String initSortName = sortNames[data.sortTypes().indexOf(data.initSortType())];
+
+    sortTypesDialog = DialogUtils.makePopupWindow(MainActivity.this, Arrays.asList(sortNames), toolbarTitle, (position) -> {
+      toolbarTitle.setText(sortNames[position]);
+      presenter.onMovieSortChanged(data.sortTypes().get(position));
+    });
+
+    toolbarTitle.setText(initSortName);
+    toolbarTitle.setOnClickListener(view -> sortTypesDialog.show());
+  }
+
+  @Override
+  protected void onDestroy() {
+    hideSortTypesDialog();
+    sortTypesDialog = null;
+    super.onDestroy();
+  }
+
+  @Override
+  public void showViewContent(MainPM data) {
+    super.showViewContent(data);
     contentAdapter.swapContent(data.movies());
+  }
+
+  private void hideSortTypesDialog() {
+    if (sortTypesDialog != null) {
+      sortTypesDialog.dismiss();
+    }
   }
 }

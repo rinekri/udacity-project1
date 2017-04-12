@@ -38,7 +38,7 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
                                     Consumer<Throwable> errorAction) {
     networkRequest(
       () -> getViewState().showLoading(),
-      (result) -> getViewState().showContent(result),
+      (result) -> getViewState().showViewContent(result),
       loadingAction,
       errorAction);
   }

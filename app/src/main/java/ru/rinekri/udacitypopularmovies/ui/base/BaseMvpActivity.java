@@ -83,7 +83,7 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
   }
 
   @Override
-  public void showContent(D data) {
+  public void showViewContent(D data) {
     switchToInitState();
   }
 
