@@ -72,10 +72,10 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
         toolbarTitle.setText(sortTypes[position]);
         switch (position) {
           case 0:
-            presenter.onMovieShortChanged(MovieSortType.Popular);
+            presenter.onMovieSortChanged(MovieSortType.Popular);
             break;
           case 1:
-            presenter.onMovieShortChanged(MovieSortType.TopRated);
+            presenter.onMovieSortChanged(MovieSortType.TopRated);
             break;
         }
       }).show();

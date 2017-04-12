@@ -42,7 +42,7 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
     router.showMessage(movieInfo.originalTitle());
   }
 
-  public void onMovieShortChanged(MovieSortType sortType) {
+  public void onMovieSortChanged(MovieSortType sortType) {
     loadContent(sortType);
   }
 
