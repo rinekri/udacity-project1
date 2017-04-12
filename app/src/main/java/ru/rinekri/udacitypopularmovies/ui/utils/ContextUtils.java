@@ -7,6 +7,10 @@ import ru.rinekri.udacitypopularmovies.ApplicationComponent;
 import ru.rinekri.udacitypopularmovies.MyApplication;
 
 public class ContextUtils {
+  public ContextUtils() {
+    throw new RuntimeException("Static class");
+  }
+
   public static ApplicationComponent appComponent(Context context) {
     return ((MyApplication) context.getApplicationContext()).appComponent;
   }
