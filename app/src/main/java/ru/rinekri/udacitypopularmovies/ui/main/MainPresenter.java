@@ -59,7 +59,7 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
 
   private void loadViewContent(MovieSortType sortType) {
     abortNetworkRequests();
-    elceNetworkRequest(() -> interactor.getData(sortType));
+    elceNetworkRequestL(() -> interactor.getData(sortType));
   }
 
   private void showInitContent(MovieSortType sortType) {

@@ -1,6 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java8.util.function.Consumer;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.ui.base.functions.UnsafeSupplier;
+import ru.rinekri.udacitypopularmovies.ui.base.models.NetworkRequestWrapper;
 import timber.log.Timber;
 
 abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpPresenter<V> {
@@ -28,69 +30,85 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
     networkRequests.clear();
   }
 
-  protected void elceNetworkRequest(UnsafeSupplier<D> loadingAction) {
-    elceNetworkRequest(
-      loadingAction,
+  protected void elceNetworkRequestL(UnsafeSupplier<D> onLoad) {
+    elceNetworkRequestLE(
+      onLoad,
+      (error) -> getViewState().showError(error.getMessage())
+    );
+  }
+
+  protected void elceNetworkRequestLS(UnsafeSupplier<D> onLoad,
+                                      Consumer<D> onSuccess) {
+    networkRequest(
+      () -> getViewState().showLoading(),
+      onSuccess,
+      onLoad,
       (error) -> getViewState().showError(error.getMessage()));
   }
 
-  protected void elceNetworkRequest(UnsafeSupplier<D> loadingAction,
-                                    Consumer<Throwable> errorAction) {
+  protected void elceNetworkRequestLE(UnsafeSupplier<D> onLoad,
+                                      Consumer<Throwable> onError) {
     networkRequest(
       () -> getViewState().showLoading(),
       (result) -> getViewState().showViewContent(result),
-      loadingAction,
-      errorAction);
+      onLoad,
+      onError);
   }
 
-  protected void networkRequest(Runnable beforeLoadingAction,
-                                Consumer<D> endLoadingAction,
-                                UnsafeSupplier<D> loadingAction,
-                                Consumer<Throwable> errorAction) {
+  protected void networkRequest(Runnable onPrepare,
+                                Consumer<D> onSuccess,
+                                UnsafeSupplier<D> onLoad,
+                                Consumer<Throwable> onError) {
 
-    AsyncTask request = new NetworkRequest(beforeLoadingAction, endLoadingAction,
-      loadingAction, errorAction);
+    AsyncTask request = new NetworkRequest(
+      onPrepare,
+      onSuccess,
+      () -> NetworkRequestWrapper.create(onLoad.get(), null),
+      onError
+    );
     networkRequests.add(request);
     request.execute();
   }
 
-  public class NetworkRequest extends AsyncTask<Object, Void, D> {
-    private Runnable beforeLoadingAction1;
-    private Consumer<D> endLoadingAction;
-    private UnsafeSupplier<D> loadingAction;
-    private Consumer<Throwable> errorAction;
+  public class NetworkRequest extends AsyncTask<Object, Void, NetworkRequestWrapper<D>> {
+    private Runnable onPrepare;
+    private Consumer<D> onSuccess;
+    private UnsafeSupplier<NetworkRequestWrapper<D>> onLoad;
+    private Consumer<Throwable> onError;
 
-    public NetworkRequest(Runnable beforeLoadingAction,
-                          Consumer<D> endLoadingAction,
-                          UnsafeSupplier<D> loadingAction,
-                          Consumer<Throwable> errorAction) {
-      this.beforeLoadingAction1 = beforeLoadingAction;
-      this.loadingAction = loadingAction;
-      this.endLoadingAction = endLoadingAction;
-      this.errorAction = errorAction;
+    public NetworkRequest(Runnable onPrepare,
+                          Consumer<D> onSuccess,
+                          UnsafeSupplier<NetworkRequestWrapper<D>> onLoad,
+                          Consumer<Throwable> onError) {
+      this.onPrepare = onPrepare;
+      this.onLoad = onLoad;
+      this.onSuccess = onSuccess;
+      this.onError = onError;
     }
 
     @Override
     protected void onPreExecute() {
-      beforeLoadingAction1.run();
+      onPrepare.run();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    protected D doInBackground(Object... params) {
+    protected NetworkRequestWrapper<D> doInBackground(Object... params) {
       try {
-        return loadingAction.get();
+        return onLoad.get();
       } catch (Exception ex) {
-        Timber.e("Loading error occurred: %s", ex.getMessage());
-        //TODO: Fix thread
-        errorAction.accept(ex);
+        return NetworkRequestWrapper.create(null, ex);
       }
-      return null;
     }
 
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     @Override
-    protected void onPostExecute(D result) {
-      if (result != null) {
-        endLoadingAction.accept(result);
+    protected void onPostExecute(@NonNull NetworkRequestWrapper<D> result) {
+      if (result.data() != null) {
+        onSuccess.accept(result.data());
+      } else if (result.error() != null) {
+        Timber.e("Loading error occurred: %s", result.error().getMessage());
+        onError.accept(result.error());
       }
     }
   }

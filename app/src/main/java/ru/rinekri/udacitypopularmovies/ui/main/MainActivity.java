@@ -14,7 +14,7 @@ import butterknife.BindView;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.network.services.MainServiceApi;
-import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 import ru.rinekri.udacitypopularmovies.ui.utils.ContextUtils;
 import ru.rinekri.udacitypopularmovies.ui.utils.DialogUtils;

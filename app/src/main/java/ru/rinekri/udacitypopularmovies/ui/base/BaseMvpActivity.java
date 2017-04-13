@@ -16,6 +16,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import butterknife.ButterKnife;
 import ru.rinekri.udacitypopularmovies.R;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -68,7 +69,7 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
 
   private void initElceViews(ActivityConfig config) {
     emptyView = ButterKnife.findById(this, config.elceEmptyViewId());
-    errorView = ButterKnife.findById(this, config.elceEmptyViewId());
+    errorView = ButterKnife.findById(this, config.elceErrorViewId());
     progressView = ButterKnife.findById(this, config.elceProgressViewId());
     contentView = ButterKnife.findById(this, config.contentContainerId());
     Integer gravity;

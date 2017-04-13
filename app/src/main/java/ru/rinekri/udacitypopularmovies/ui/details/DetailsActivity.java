@@ -14,7 +14,7 @@ import butterknife.BindView;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.R;
-import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
 public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements DetailsView {
