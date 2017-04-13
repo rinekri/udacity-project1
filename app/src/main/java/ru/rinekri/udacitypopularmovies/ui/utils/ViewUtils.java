@@ -8,7 +8,7 @@ public class ViewUtils {
     throw new RuntimeException("Static class");
   }
 
-  public static void showSnackMessage(View targetView, String message) {
+  public static void showSnack(View targetView, String message) {
     Snackbar.make(targetView, message, Snackbar.LENGTH_LONG).show();
   }
 }
