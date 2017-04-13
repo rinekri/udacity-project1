@@ -63,6 +63,6 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   }
 
   private void showInitContent(MovieSortType sortType) {
-    getViewState().showInitContent(new AutoValue_MainIM(SORT_TYPES, sortType));
+    getViewState().showInitContent(MainIM.create(SORT_TYPES, sortType));
   }
 }

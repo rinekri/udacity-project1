@@ -1,7 +1,7 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.google.auto.value.AutoValue;
 
@@ -11,6 +11,10 @@ import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 
 @AutoValue
 abstract public class MainPM implements Parcelable {
-  @Nullable
+  @NonNull
   abstract List<MovieInfo> movies();
+
+  public static MainPM create(@NonNull List<MovieInfo> movies) {
+    return new AutoValue_MainPM(movies);
+  }
 }
