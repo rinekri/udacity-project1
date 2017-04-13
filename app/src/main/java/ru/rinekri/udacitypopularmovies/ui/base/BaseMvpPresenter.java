@@ -81,6 +81,7 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
         return loadingAction.get();
       } catch (Exception ex) {
         Timber.e("Loading error occurred: %s", ex.getMessage());
+        //TODO: Fix thread
         errorAction.accept(ex);
       }
       return null;
