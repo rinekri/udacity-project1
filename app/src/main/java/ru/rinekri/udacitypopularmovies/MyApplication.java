@@ -15,11 +15,11 @@ public class MyApplication extends Application {
     setupAppComponent();
     setupLogs();
     setupCalligraphy();
-    setLeakCanary();
+    setupLeakCanary();
     super.onCreate();
   }
 
-  private void setLeakCanary() {
+  private void setupLeakCanary() {
     LeakCanary.install(this);
   }
 
