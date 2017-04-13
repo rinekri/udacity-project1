@@ -17,6 +17,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import butterknife.ButterKnife;
 import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -104,16 +105,12 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
   }
 
   @Override
-  public void showError(@Nullable String message) {
+  public void showError(ErrorConfig errorConfig) {
     errorView.setVisibility(VISIBLE);
     emptyView.setVisibility(View.GONE);
     progressView.setVisibility(GONE);
     contentView.setVisibility(GONE);
-    if (message != null) {
-      errorView.setText(message);
-    } else {
-      errorView.setText(getString(R.string.error_default));
-    }
+    errorView.setText(errorConfig.resolveTitle(this));
   }
 
   @Override

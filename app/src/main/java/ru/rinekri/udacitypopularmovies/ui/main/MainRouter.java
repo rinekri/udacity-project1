@@ -21,6 +21,6 @@ public class MainRouter {
   }
 
   public void showMessage(String text) {
-    ViewUtils.showSnackMessage(messageView, text);
+    ViewUtils.showSnack(messageView, text);
   }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import java8.util.function.Consumer;
 import java8.util.stream.StreamSupport;
 import ru.rinekri.udacitypopularmovies.ui.base.functions.UnsafeSupplier;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.models.NetworkRequestWrapper;
 import timber.log.Timber;
 
@@ -33,7 +34,7 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
   protected void elceNetworkRequestL(UnsafeSupplier<D> onLoad) {
     elceNetworkRequestLE(
       onLoad,
-      (error) -> getViewState().showError(error.getMessage())
+      (error) -> getViewState().showError(ErrorConfig.createFrom(error))
     );
   }
 
@@ -43,7 +44,7 @@ abstract public class BaseMvpPresenter<D, V extends BaseMvpView<D>> extends MvpP
       () -> getViewState().showLoading(),
       onSuccess,
       onLoad,
-      (error) -> getViewState().showError(error.getMessage()));
+      (error) -> getViewState().showError(ErrorConfig.createFrom(error)));
   }
 
   protected void elceNetworkRequestLE(UnsafeSupplier<D> onLoad,

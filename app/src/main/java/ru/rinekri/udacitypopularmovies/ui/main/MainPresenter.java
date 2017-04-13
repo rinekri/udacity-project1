@@ -10,7 +10,7 @@ import java.util.List;
 
 import ru.rinekri.udacitypopularmovies.network.models.MovieInfo;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpPresenter;
-import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
+import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 import ru.rinekri.udacitypopularmovies.ui.base.SyncInteractor;
 import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 

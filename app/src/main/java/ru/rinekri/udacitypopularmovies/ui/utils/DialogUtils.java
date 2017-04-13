@@ -16,6 +16,7 @@ public class DialogUtils {
     throw new RuntimeException("Static class");
   }
 
+  @SuppressWarnings("unchecked")
   public static ListPopupWindow makePopupWindow(Context context,
                                                 List<String> data,
                                                 View anchorView,
