@@ -1,13 +1,14 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
 
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+
 import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 public interface BaseMvpView<D> extends MvpView {
   void showViewContent(D data);
   void showLoading();
-  void showEmpty();
-  void showError(String message);
+  void showEmpty(@Nullable @StringRes Integer messageRes);
+  void showError(@Nullable String message);
 }

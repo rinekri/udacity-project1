@@ -2,6 +2,8 @@ package ru.rinekri.udacitypopularmovies.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -88,19 +90,29 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
   }
 
   @Override
-  public void showEmpty() {
+  public void showEmpty(@Nullable @StringRes Integer messageRes) {
     errorView.setVisibility(GONE);
     emptyView.setVisibility(VISIBLE);
     progressView.setVisibility(GONE);
     contentView.setVisibility(GONE);
+    if (messageRes != null) {
+      emptyView.setText(getString(messageRes));
+    } else {
+      emptyView.setText(getString(R.string.empty_default));
+    }
   }
 
   @Override
-  public void showError(String message) {
+  public void showError(@Nullable String message) {
     errorView.setVisibility(VISIBLE);
     emptyView.setVisibility(View.GONE);
     progressView.setVisibility(GONE);
     contentView.setVisibility(GONE);
+    if (message != null) {
+      errorView.setText(message);
+    } else {
+      errorView.setText(getString(R.string.error_default));
+    }
   }
 
   @Override
