@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/elce_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/elce_empty_view"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:padding="@dimen/medium_padding"
+        android:textSize="16sp"
+        tools:text="dasddsadsad"/>
+
+    <TextView
+        android:id="@+id/elce_error_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/medium_padding"
+        android:textSize="16sp"
+        tools:text="dasddsadsad"/>
+
+    <ProgressBar
+        android:id="@+id/elce_progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:textSize="16sp"/>
+</FrameLayout>

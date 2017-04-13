@@ -113,8 +113,11 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <include
-        layout="@layout/elce_main"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <include layout="@layout/elce_details"/>
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
