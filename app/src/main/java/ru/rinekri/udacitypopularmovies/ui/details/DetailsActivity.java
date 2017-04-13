@@ -17,6 +17,8 @@ import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
+import static ru.rinekri.udacitypopularmovies.ui.UiConstants.BLUR_RADIUS;
+
 public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements DetailsView {
   private static final String EXTRA_MOVIE_SHORT_INFO = BuildConfig.APPLICATION_ID + ".extra_short_info";
   private static final String EXTRA_TITLE = BuildConfig.APPLICATION_ID + ".extra_title";
@@ -67,7 +69,7 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
     Picasso
       .with(this)
       .load(data.movieInfo().posterPath())
-      .transform(new BlurTransformation(this))
+      .transform(new BlurTransformation(this, BLUR_RADIUS))
       .into(moviePoster);
     voteAverage.setText(data.movieInfo().voteAverage());
     overview.setText(data.movieInfo().overview());
