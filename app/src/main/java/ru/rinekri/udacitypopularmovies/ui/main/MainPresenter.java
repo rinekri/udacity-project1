@@ -1,5 +1,8 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.arellomobile.mvp.InjectViewState;
 
 import java.util.Arrays;
@@ -13,9 +16,10 @@ import ru.rinekri.udacitypopularmovies.ui.details.MovieShortInfo;
 
 @InjectViewState
 public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
-  private final List<MovieSortType> sortTypes = Arrays.asList(MovieSortType.values());
-  private final MovieSortType initSortType = MovieSortType.Popular;
+  private static final List<MovieSortType> SORT_TYPES = Arrays.asList(MovieSortType.values());
+  private static final MovieSortType INIT_SORT_TYPE = MovieSortType.Popular;
 
+  @Nullable
   private MainRouter router;
   private SyncInteractor<MovieSortType, MainPM> interactor;
 
@@ -23,15 +27,15 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
     this.interactor = interactor;
   }
 
-  void setRouter(MainRouter router) {
+  void setRouter(@NonNull MainRouter router) {
     this.router = router;
   }
 
   @Override
   protected void onFirstViewAttach() {
     super.onFirstViewAttach();
-    initContent(initSortType);
-    loadContent(initSortType);
+    showInitContent(INIT_SORT_TYPE);
+    loadViewContent(INIT_SORT_TYPE);
   }
 
   @Override
@@ -49,16 +53,16 @@ public class MainPresenter extends BaseMvpPresenter<MainPM, MainView> {
   }
 
   public void onMovieSortChanged(MovieSortType sortType) {
-    initContent(sortType);
-    loadContent(sortType);
+    showInitContent(sortType);
+    loadViewContent(sortType);
   }
 
-  private void loadContent(MovieSortType sortType) {
+  private void loadViewContent(MovieSortType sortType) {
     abortNetworkRequests();
     elceNetworkRequest(() -> interactor.getData(sortType));
   }
 
-  private void initContent(MovieSortType sortType) {
-    getViewState().showInitContent(new AutoValue_MainIM(sortTypes, sortType));
+  private void showInitContent(MovieSortType sortType) {
+    getViewState().showInitContent(new AutoValue_MainIM(SORT_TYPES, sortType));
   }
 }

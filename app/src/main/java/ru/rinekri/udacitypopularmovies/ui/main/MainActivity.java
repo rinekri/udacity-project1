@@ -1,6 +1,5 @@
 package ru.rinekri.udacitypopularmovies.ui.main;
 
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
@@ -29,9 +28,7 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   TextView toolbarTitle;
   MainAdapter contentAdapter;
-  ListPopupWindow sortTypesDialog;
-  @Nullable
-  MainIM initModel;
+  ListPopupWindow sortTypesSelector;
 
   @InjectPresenter
   public MainPresenter presenter;
@@ -69,7 +66,6 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
   @Override
   public void showInitContent(MainIM data) {
-    initModel = data;
     toolbarTitle = (TextView) getLayoutInflater().inflate(R.layout.view_spinner, null);
     getToolbar().removeAllViews();
     getToolbar().addView(toolbarTitle);
@@ -81,20 +77,21 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
 
     String initSortName = sortNames[data.sortTypes().indexOf(data.initSortType())];
 
-    //TODO: Fix bug with with height
-    sortTypesDialog = DialogUtils.makePopupWindow(this, Arrays.asList(sortNames), toolbarTitle, (position) -> {
-      toolbarTitle.setText(sortNames[position]);
-      presenter.onMovieSortChanged(data.sortTypes().get(position));
-    });
-
+    //TODO: Add logic to restore dialog after rotate. For example, with Runnable?
     toolbarTitle.setText(initSortName);
-    toolbarTitle.setOnClickListener(view -> sortTypesDialog.show());
+    toolbarTitle.setOnClickListener(view -> {
+      sortTypesSelector = DialogUtils.makePopupWindow(this, Arrays.asList(sortNames), toolbarTitle, (position) -> {
+        toolbarTitle.setText(sortNames[position]);
+        presenter.onMovieSortChanged(data.sortTypes().get(position));
+      });
+      sortTypesSelector.show();
+    });
   }
 
   @Override
   protected void onDestroy() {
     hideSortTypesDialog();
-    sortTypesDialog = null;
+    sortTypesSelector = null;
     super.onDestroy();
   }
 
@@ -105,8 +102,8 @@ public class MainActivity extends BaseMvpActivity<MainPM> implements MainView {
   }
 
   private void hideSortTypesDialog() {
-    if (sortTypesDialog != null) {
-      sortTypesDialog.dismiss();
+    if (sortTypesSelector != null) {
+      sortTypesSelector.dismiss();
     }
   }
 }
