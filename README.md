@@ -5,6 +5,13 @@
 # Android Developer Nanodegree
 Udacity Project - Popular Movies, Stage 1
 
+## How set API key
+1. Create file **gradle.properties** in the _poject/app_ directory.
+2. Add to the API KEY like this:
+`THE_MOVIE_DB_API_KEY = 111111`
+
+where **111111** corresponding api key.
+
 ## Goals
 Goal | Progress
 ------------ | -------------
