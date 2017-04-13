@@ -7,7 +7,7 @@ import com.google.auto.value.AutoValue;
 
 import java.util.List;
 
-import ru.rinekri.udacitypopularmovies.ui.base.MovieSortType;
+import ru.rinekri.udacitypopularmovies.ui.base.models.MovieSortType;
 
 @AutoValue
 abstract public class MainIM implements Parcelable {

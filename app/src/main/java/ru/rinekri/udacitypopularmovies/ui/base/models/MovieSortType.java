@@ -1,4 +1,4 @@
-package ru.rinekri.udacitypopularmovies.ui.base;
+package ru.rinekri.udacitypopularmovies.ui.base.models;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
