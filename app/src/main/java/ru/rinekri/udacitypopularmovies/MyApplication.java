@@ -2,6 +2,8 @@ package ru.rinekri.udacitypopularmovies;
 
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -13,7 +15,12 @@ public class MyApplication extends Application {
     setupAppComponent();
     setupLogs();
     setupCalligraphy();
+    setupLeakCanary();
     super.onCreate();
+  }
+
+  private void setupLeakCanary() {
+    LeakCanary.install(this);
   }
 
   private void setupAppComponent() {

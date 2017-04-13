@@ -3,4 +3,9 @@
     <string name="details_vote_average">Vote average</string>
     <string name="details_release_date">Release date</string>
     <string name="details_overview">Overview</string>
+    <string name="main_sort_popular_movies">Popular movies</string>
+    <string name="main_sort_top_rated_movies">Top-rated movies</string>
+    <!--TODO: Update default resources-->
+    <string name="empty_default">Nothing show</string>
+    <string name="error_default">Something went wrong</string>
 </resources>

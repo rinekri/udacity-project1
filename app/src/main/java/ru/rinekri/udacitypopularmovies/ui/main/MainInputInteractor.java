@@ -27,7 +27,8 @@ public class MainInputInteractor implements SyncInteractor<MovieSortType, MainPM
         break;
       case Popular:
         movies = mMainServiceApi.getPopularMovies().execute().body().results();
+        break;
     }
-    return new AutoValue_MainPM(movies);
+    return MainPM.create(movies);
   }
 }

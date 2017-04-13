@@ -14,7 +14,7 @@ import butterknife.BindView;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import ru.rinekri.udacitypopularmovies.BuildConfig;
 import ru.rinekri.udacitypopularmovies.R;
-import ru.rinekri.udacitypopularmovies.ui.base.ActivityConfig;
+import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.BaseMvpActivity;
 
 public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements DetailsView {
@@ -62,8 +62,8 @@ public class DetailsActivity extends BaseMvpActivity<DetailsPM> implements Detai
   }
 
   @Override
-  public void showContent(DetailsPM data) {
-    super.showContent(data);
+  public void showViewContent(DetailsPM data) {
+    super.showViewContent(data);
     Picasso
       .with(this)
       .load(data.movieInfo().posterPath())
