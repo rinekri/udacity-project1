@@ -1,5 +1,6 @@
 package ru.rinekri.udacitypopularmovies.ui.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
 import ru.rinekri.udacitypopularmovies.R;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ActivityConfig;
 import ru.rinekri.udacitypopularmovies.ui.base.models.ErrorConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -126,6 +128,11 @@ abstract public class BaseMvpActivity<D> extends MvpAppCompatActivity implements
     emptyView.setVisibility(GONE);
     progressView.setVisibility(GONE);
     contentView.setVisibility(VISIBLE);
+  }
+
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 
   @NonNull
