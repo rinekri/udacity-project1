@@ -39,6 +39,7 @@ public abstract class ErrorConfig {
       .errorMessageText(null);
   }
 
+  //TODO: Add CallAdapter to extract server errors
   public static ErrorConfig createFrom(Throwable error) {
     if (error instanceof UnknownHostException || error instanceof ConnectException) {
       return builder().errorMessageRes(R.string.error_no_network).build();
