@@ -55,6 +55,7 @@ public class MainAdapter extends BaseSimpleAdapter<MovieInfo, MainAdapter.MainVi
       Picasso
         .with(poster.getContext())
         .load(item.posterPath())
+        .placeholder(R.drawable.ic_main_placeholder)
         .into(poster);
 
       itemView.setOnClickListener((view) -> {
