@@ -8,6 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="0dp"
+    app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="true"
     android:foreground="?attr/selectableItemBackground">
     <ImageView
