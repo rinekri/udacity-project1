@@ -13,7 +13,7 @@ import timber.log.Timber;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 public class PosterPathAdapter {
-  private static final String IMAGE_SIZE = "w500";
+  private static final String IMAGE_SIZE = "w185";
 
   @FromJson
   @PosterPath
