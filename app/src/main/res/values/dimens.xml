@@ -1,5 +1,10 @@
 <resources>
+    <dimen name="small_padding">6dp</dimen>
     <dimen name="base_padding">16dp</dimen>
     <dimen name="medium_padding">32dp</dimen>
-    <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="appbar_collapsing_backdrop_height">250dp</dimen>
+    <dimen name="details_default_card_margin">8dp</dimen>
+    <dimen name="details_default_card_elevation">1dp</dimen>
+
+    <dimen name="base_text_size">16sp</dimen>
 </resources>

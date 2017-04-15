@@ -11,8 +11,9 @@
     android:gravity="center_vertical"
     android:maxLines="1"
     android:minHeight="?attr/actionBarSize"
-    android:paddingEnd="6dp"
-    android:paddingStart="6dp"
-    android:textColor="@android:color/white"
-    android:textSize="16sp" tools:background="@color/colorPrimary"
+    android:paddingEnd="@dimen/small_padding"
+    android:paddingStart="@dimen/small_padding"
+    android:textColor="@color/lightTextColor"
+    android:textSize="@dimen/base_text_size"
+    tools:background="@color/colorPrimary"
     tools:text="Top-rated movies"/>
