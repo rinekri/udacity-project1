@@ -4,7 +4,7 @@ buildscript {
   ext {
     targetSdkVersion = 25
     minSdkVersion = 19
-    buildToolsVersion = '25.0.2'
+    buildToolsVersion = '26.0.2'
     appName = 'UdacityPopularMovies'
   }
 
